@@ -1,0 +1,24 @@
+version: '3.7'
+services:
+  app:
+    image: 'node_v1'
+    restart: always
+    logging:
+      driver : 'json-file'
+      options:
+        max-file: '3'
+        max-size: '1024m'
+  
+  nginx:
+    image: nginx:1.23.1
+    restart: always
+    logging:
+      driver : 'json-file'
+      options:
+        max-file: '3'
+        max-size: '1024m'
+    ports: 
+      - 80:80
+      - 443:443
+    volumes:
+      -$PWD/docker_nginx/:/nginx/conf.d
